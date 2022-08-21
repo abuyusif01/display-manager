@@ -1,1 +1,0 @@
-/usr/bin/g++  -g   CMakeFiles/display-manager.dir/display-manager_autogen/mocs_compilation.cpp.o CMakeFiles/display-manager.dir/main.cpp.o CMakeFiles/display-manager.dir/loginwindow.cpp.o  -o display-manager  /usr/lib/libQt5Widgets.so.5.14.1 -lpam -lpam_misc /usr/lib/libQt5Gui.so.5.14.1 /usr/lib/libQt5Core.so.5.14.1 

@@ -1,4 +1,0 @@
-/home/blackdracula/dev/display-manager/build/CMakeFiles/rebuild_cache.dir
-/home/blackdracula/dev/display-manager/build/CMakeFiles/display-manager.dir
-/home/blackdracula/dev/display-manager/build/CMakeFiles/edit_cache.dir
-/home/blackdracula/dev/display-manager/build/CMakeFiles/display-manager_autogen.dir
