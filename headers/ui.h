@@ -11,8 +11,9 @@
 class Ui : FORM, WINDOW
 {
 
-public:
-    char *name, *pass;
+private:
+    char *name, *pass; // fucking pam need c-style args
+    std::string cmd = "whoami";
 
 public:
     FORM *form;
@@ -22,7 +23,7 @@ public:
     FIELD *fields[4];
 
 public:
-    Ui();
+    void init_scr();
     void driver(int ch);
     void set_field(int index, std::string value);
     char *trim_whitespaces(char *str);
@@ -31,5 +32,7 @@ public:
     void init_input();
     char *get_name();
     char *get_pass();
+    char *get_cmd();
+    void set_cmd(char *cmd);
 };
 #endif

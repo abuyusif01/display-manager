@@ -94,7 +94,7 @@ static int conv(int num_msg, const struct pam_message **msg, struct pam_response
     return result;
 }
 
-static bool login(const char *name, const char *pass, const char* cmd)
+static bool login(const char *name, const char *pass, const char *cmd)
 {
 
     //    UserAuthentication *auth;
@@ -135,10 +135,14 @@ static bool login(const char *name, const char *pass, const char* cmd)
         return false;
     }
     struct passwd *pw = getpwnam(name);
-    pid_t *child_pid;
-    *child_pid = fork();
-    chdir(pw->pw_dir);
-    //std::string cmd = "exec /bin/bash --login .xinitrc";
+    // pid_t *child_pid;
+    // *child_pid = fork();
+    // chdir(pw->pw_dir);
+    // std::string cmd = "exec /bin/bash --login .xinitrc";
+    Ui *ui;
+    wclear(ui->body_window);
+    wclear(ui->form_window);
+    endwin();
     execl(pw->pw_shell, pw->pw_shell, "-c", cmd, NULL);
     return true;
 }
