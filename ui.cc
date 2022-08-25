@@ -60,17 +60,16 @@ Ui::Ui()
     // free_field(this->fields[3]);
     // delwin(form_window);
     // delwin(body_window);
-   
 }
 
 char *Ui::get_name()
 {
-    return this->name;
+    return this->trim_whitespaces(this->name);
 }
 
 char *Ui::get_pass()
 {
-    return this->pass;
+    return this->trim_whitespaces(this->pass);
 }
 
 void Ui::init_input()
