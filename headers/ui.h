@@ -13,7 +13,7 @@ class Ui : FORM, WINDOW
 
 private:
     char *name, *pass; // fucking pam need c-style args
-    std::string cmd = "whoami";
+    std::string cmd = "startx";
 
 public:
     FORM *form;
