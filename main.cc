@@ -1,5 +1,4 @@
 #include "headers/ui.h"
-#include "authentication.cc"
 
 int main(int argc, char const *argv[])
 {
