@@ -11,6 +11,7 @@ private:
     std::string error = "[ERROR] "; // the spaces here are intentional
     std::string warning = "[WARNING] ";
     std::string info = "[INFO] ";
+    std::string unknown = "[UNKNOWN] ";
     int type;
 
 public:
@@ -19,6 +20,7 @@ public:
     void set_location(std::string location);
     void set_content(std::string content);
     void set_type(int type);
+    std::string clean(std::string content);
     std::string get_location();
     std::string get_content();
     int get_type();

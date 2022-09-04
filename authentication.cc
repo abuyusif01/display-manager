@@ -1,9 +1,14 @@
 #define SERVICE_NAME "display-manager"
-#include "headers/ui.h"
+#define LOG_FILE "/home/abuyusif01/.config/dm.log"
+
 #include <security/pam_appl.h>
 #include <security/pam_misc.h>
 #include <pwd.h>
 #include <paths.h>
+
+#include "headers/ui.h"
+#include "headers/logger.h"
+
 
 static pam_handle_t *pam_handle;
 

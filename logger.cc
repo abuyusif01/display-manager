@@ -1,4 +1,5 @@
 #include "headers/logger.h"
+#include "utils/headers/date_time.h"
 #include <fstream>
 #include <chrono>
 #include <ctime>
@@ -10,32 +11,34 @@ Logger::Logger()
 
 Logger::Logger(int type, std::string content, std::string location)
 {
-   
+    CurrentDateTime *date_and_time;
 
     this->type = type;
     this->content = content;
-    this->location = location; // technically the file name for now
-
+    this->location = location;      // technically the file name for now
     std::ofstream logger(location); // open file with the given name
-
-    // [INFO] 2022-02-10:00: Loggin Failed
 
     switch (type)
     {
     case 1:
-        logger << this->error << (now->tm_year + 1900) << "-" << (now->tm_mon + 1) << "-" << (now->tm_mday) << "-" << (now->tm_min) << ":" << (now->tm_sec) << content << "\n";
+        logger << this->error << date_and_time->date_and_time() << this->clean(content);
         break;
     case 2:
-        logger << this->error << (now->tm_year) << "-" << (now->tm_mon) << "-" << (now->tm_mday) << "-" << (now->tm_min) << ":" << (now->tm_sec) << content << "\n";
+        logger << this->warning << date_and_time->date_and_time() << this->clean(content);
         break;
     case 3:
-        logger << this->error << (now->tm_year) << "-" << (now->tm_mon) << "-" << (now->tm_mday) << "-" << (now->tm_min) << ":" << (now->tm_sec) << content << "\n";
+        logger << this->info << date_and_time->date_and_time() << this->clean(content);
         break;
     default:
-        logger << "[UNKNOWN ERROR TYPE] " << (now->tm_year) << "-" << (now->tm_mon) << "-" << (now->tm_mday) << content << "\n";
+        logger << this->unknown << date_and_time->date_and_time() << this->clean(content);
     }
 
     logger.close();
+}
+
+std::string Logger::clean(std::string content)
+{
+    return content.insert(0, " ");
 }
 
 std::string Logger::get_content()
@@ -47,6 +50,7 @@ std::string Logger::get_location()
 {
     return this->location;
 }
+
 int Logger::get_type()
 {
     return this->type;
@@ -77,6 +81,6 @@ void Logger::set_type(int type)
         this->type = 3;
         break;
     default:
-        this->type = 1;
+        this->type = -1;
     }
 }
