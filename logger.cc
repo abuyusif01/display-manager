@@ -11,6 +11,7 @@ Logger::Logger()
 Logger::Logger(int type, std::string content, std::string location)
 {
    
+
     this->type = type;
     this->content = content;
     this->location = location; // technically the file name for now
@@ -22,10 +23,16 @@ Logger::Logger(int type, std::string content, std::string location)
     switch (type)
     {
     case 1:
-        
-        // logger << this->error << std::ctime(&now) << content;
+        logger << this->error << (now->tm_year + 1900) << "-" << (now->tm_mon + 1) << "-" << (now->tm_mday) << "-" << (now->tm_min) << ":" << (now->tm_sec) << content << "\n";
+        break;
     case 2:
+        logger << this->error << (now->tm_year) << "-" << (now->tm_mon) << "-" << (now->tm_mday) << "-" << (now->tm_min) << ":" << (now->tm_sec) << content << "\n";
+        break;
     case 3:
+        logger << this->error << (now->tm_year) << "-" << (now->tm_mon) << "-" << (now->tm_mday) << "-" << (now->tm_min) << ":" << (now->tm_sec) << content << "\n";
+        break;
+    default:
+        logger << "[UNKNOWN ERROR TYPE] " << (now->tm_year) << "-" << (now->tm_mon) << "-" << (now->tm_mday) << content << "\n";
     }
 
     logger.close();
