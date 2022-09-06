@@ -1,6 +1,6 @@
-FILES = $(shell ls *.cc)
+FILES = $(shell find . -name '*.cc' -follow -type f -print0 | xargs -0 ls)
 all:
-	g++ -Wall -o main $(FILES) -lncurses -lform -lpam
+	g++ -Werror -o main $(FILES) -lncurses -lform -lpam
 
 .PHONY: clean
 
