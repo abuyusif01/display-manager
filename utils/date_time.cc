@@ -1,7 +1,10 @@
 #include "headers/date_time.h"
 #include <time.h>
-#include <stdio.h>
-#include <string>
+
+CurrentDateTime::CurrentDateTime()
+{
+    // this gonna be empty for now
+}
 
 std::string CurrentDateTime::date_and_time()
 {

@@ -1,10 +1,11 @@
 #include "headers/logger.h"
 #include "utils/headers/date_time.h"
-#include <fstream>
+#include <fstream> // files related task [log]
 
 Logger::Logger()
 {
     // this gonna be nothing for now
+    // std::cout << "fucking hell";
 }
 
 Logger::Logger(int type, std::string content, std::string location)
@@ -13,7 +14,7 @@ Logger::Logger(int type, std::string content, std::string location)
 
     this->type = type;
     this->content = content;
-    this->location = location;      // technically the file name for now
+    this->location = location;      //  the file name
     std::ofstream logger(location); // open file with the given name
 
     switch (type)

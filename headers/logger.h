@@ -1,5 +1,6 @@
 #ifndef LOGGER_H
 #define LOGGER_H
+#define LOG_FILE "/home/abuyusif01/.config/dm.log"
 #include <string>
 
 class Logger
@@ -16,7 +17,7 @@ private:
 
 public:
     Logger();
-    Logger(int type, std::string content, std::string location);
+    Logger(int type, std::string content, std::string location = LOG_FILE);
     void set_location(std::string location);
     void set_content(std::string content);
     void set_type(int type);
