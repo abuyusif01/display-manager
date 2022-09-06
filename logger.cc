@@ -1,8 +1,6 @@
 #include "headers/logger.h"
 #include "utils/headers/date_time.h"
 #include <fstream>
-#include <chrono>
-#include <ctime>
 
 Logger::Logger()
 {

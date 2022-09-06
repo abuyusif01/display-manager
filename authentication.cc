@@ -9,7 +9,6 @@
 #include "headers/ui.h"
 #include "headers/logger.h"
 
-
 static pam_handle_t *pam_handle;
 
 static int end(int last_result)
@@ -102,8 +101,6 @@ static int conv(int num_msg, const struct pam_message **msg, struct pam_response
 static bool login(const char *name, const char *pass, const char *cmd)
 {
 
-    //    UserAuthentication *auth;
-
     const char *data[2] = {name, pass};
     struct pam_conv pam_conv
     {
@@ -140,14 +137,12 @@ static bool login(const char *name, const char *pass, const char *cmd)
         return false;
     }
     struct passwd *pw = getpwnam(name);
-    // pid_t *child_pid;
-    // *child_pid = fork();
-    // chdir(pw->pw_dir);
-    // std::string cmd = "exec /bin/bash --login .xinitrc";
+
     Ui *ui;
     wclear(ui->body_window);
     wclear(ui->form_window);
     endwin();
+    chdir(pw->pw_dir);
     execl(pw->pw_shell, pw->pw_shell, "-c", cmd, NULL);
     return true;
 }
