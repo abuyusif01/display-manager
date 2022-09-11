@@ -180,17 +180,17 @@ static bool login(const char *name, const char *pass, const char *cmd)
         incase something went wrong, we need to make sure that we delete the ui object
         before we exit the program
     */
-   
+
     wclear(ui->body_window);
     wclear(ui->form_window);
     endwin();
 
     chdir(pw->pw_dir);
 
-    // might need a thread here
+    // might need a thread here need to get the exit code from the child process
     if (execl(pw->pw_shell, pw->pw_shell, "-c", cmd, NULL) == -1)
     {
-        Logger(1, "X: command cant be executed");
+        Logger(1, "X: command can mot be executed");
         delete (ui);
     }
     else
