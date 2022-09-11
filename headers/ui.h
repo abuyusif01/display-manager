@@ -35,4 +35,4 @@ public:
     char *get_cmd();
     void set_cmd(char *cmd);
 };
-#endif
+#endif // UI_H
