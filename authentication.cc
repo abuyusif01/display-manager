@@ -18,6 +18,7 @@ static int end(int last_result)
     return result;
 }
 
+// test logger class on this function
 static bool set_env(std::string name, std::string value)
 {
     std::string name_value = name + "=" + value;
@@ -129,6 +130,7 @@ static int conv(int num_msg, const struct pam_message **msg, struct pam_response
     {
         free(*resp);
         *resp = 0;
+        Logger(1, "pam_conv: failed resp set to nullptr");
     }
     return result;
 }
@@ -172,18 +174,29 @@ static bool login(const char *name, const char *pass, const char *cmd)
     }
     struct passwd *pw = getpwnam(name);
 
-    Ui *ui;
+    Ui *ui = new Ui();
+
+    /*
+        incase something went wrong, we need to make sure that we delete the ui object
+        before we exit the program
+    */
+   
     wclear(ui->body_window);
     wclear(ui->form_window);
     endwin();
+
     chdir(pw->pw_dir);
+
+    // might need a thread here
     if (execl(pw->pw_shell, pw->pw_shell, "-c", cmd, NULL) == -1)
     {
         Logger(1, "X: command cant be executed");
+        delete (ui);
     }
     else
     {
         Logger(3, "startx: Command run succesfully");
+        delete (ui);
     }
     return true;
 }
