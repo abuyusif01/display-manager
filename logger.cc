@@ -1,6 +1,7 @@
 #include "headers/logger.h"
 #include "utils/headers/date_time.h"
 #include <fstream> // files related task [log]
+#include <ios>
 
 Logger::Logger()
 {
@@ -15,7 +16,10 @@ Logger::Logger(int type, std::string content, std::string location)
     this->type = type;
     this->content = content;
     this->location = location;      //  the file name
-    std::ofstream logger(location); // open file with the given name
+
+    std::ofstream logger("t.txtt",std::ios::app); // open file with the given name
+    
+    // todo: append to file not create new all the time
 
     switch (type)
     {
