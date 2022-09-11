@@ -49,6 +49,7 @@ static bool set_env(std::string name, std::string value)
 
 static bool logout(void)
 {
+    
     /*
     1 -> ERROR
     2 -> WARNING
