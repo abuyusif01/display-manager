@@ -1,6 +1,7 @@
 #include "headers/ui.h"
 
 #include "authentication.cc"
+#include <ncurses.h>
 
 // constructor
 void Ui::init_scr()
@@ -66,10 +67,7 @@ char *Ui::get_pass()
 {
     return this->trim_whitespaces(this->pass);
 }
-// char *Ui::get_cmd()
-// {
-//     return this->trim_whitespaces(this->cmd);
-// }
+
 void Ui::init_input()
 {
     this->name = field_buffer(this->fields[1], 0);
@@ -91,7 +89,7 @@ void Ui::driver(int ch)
         form_driver(this->form, REQ_PREV_FIELD);
         pos_form_cursor(this->form);
         this->init_input();
-
+        
         if (login(this->get_name(), this->get_pass(), this->cmd.c_str()))
         {
             

@@ -1,6 +1,6 @@
 #ifndef LOGGER_H
 #define LOGGER_H
-#define LOG_FILE "/home/abuyusif01/.config/dm.log"
+#define LOG_FILE "/home/yayah/.config/dm.log"
 #include <string>
 
 class Logger
