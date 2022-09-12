@@ -1,0 +1,16 @@
+[Unit]
+Description=ncurses display manager
+After=systemd-user-sessions.service plymouth-quit-wait.service
+After=getty@tty2.service
+
+[Service]
+User=abuyusif01
+Type=idle
+ExecStart=/usr/bin/dm
+StandardInput=tty
+TTYPath=/dev/tty2
+TTYReset=yes
+TTYVHangup=yes
+
+[Install]
+Alias=display-manager.service
