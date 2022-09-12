@@ -5,6 +5,8 @@ function compile() { # args $1: source file and location, $2: output file with l
 }
 
 function prepare() { # no args, Just default shit
+# install dependencies
+    sudo apt install -y 
     # copy binary to /usr/local/bin
     # copy systemd file to /etc/systemd/system
 }
