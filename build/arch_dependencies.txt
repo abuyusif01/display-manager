@@ -1,2 +1,3 @@
+g++
 pam
 ncurses
