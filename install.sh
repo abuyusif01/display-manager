@@ -34,7 +34,7 @@ function prepare() { # no args, Just default shit
             sudo systemctl disable display-manager.service 2>/dev/null
             echo "[+] Enabling dm.service"
             sudo systemctl enable dm.service 2>/dev/null
-            
+
         elif [[ "$ID" != "ubuntu" ]]; then
             echo "[+] Normal environment detected"
             echo "[+] Would you like to enable dm at startup"
@@ -58,10 +58,10 @@ function compile() {
     make clean
     make debug
     cp main bin/debug/dm_debug
-    rm main
+    rm -rf main
     make release
     cp main bin/release/dm
-    rm main
+    rm -rf main
 }
 
 function install() {
