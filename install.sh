@@ -46,10 +46,11 @@ function prepare() { # no args, Just default shit
             fi
             echo "[+] Not enabling dm at startup"
         fi
+    else
+        echo "[-] Could not detect distro"
+        echo "[-] You sure u are using linux?"
+        exit -1
     fi
-
-    # ask the user if they wanna disable and enale dm
-
 }
 
 function compile() {
