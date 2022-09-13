@@ -24,13 +24,19 @@ function prepare() { # no args, Just default shit
     echo "[+] Copying systemd files"
     sudo cp config/systemd/* /etc/systemd/system/
 
-    # disable display-manager.service
-    echo "[+] Disabling display-manager.service"
-    sudo systemctl disable display-manager.service
+    # ask the user if they wanna disable and enale dm
+    echo "[+] Would you like to enable dm at startup"
+    read -p "[+] (y/n): " choice
+    if [[ $choice == "y" ]]; then
+        # disable display-manager.service
+        echo "[+] Disabling display-manager.service"
+        sudo systemctl disable display-manager.service
+        echo "[+] Enabling dm.service"
+        sudo systemctl enable dm.service
+    else
+        echo "[+] Not enabling dm at startup"
+    fi
 
-    # enable dm.service
-    echo "[+] Enabling dm.service"
-    sudo systemctl enable dm.service
 
 }
 
