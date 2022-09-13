@@ -52,10 +52,13 @@ Utils = Utils()
 arch_dependencies = open("../arch_dependencies.txt").read().splitlines()
 deb_dependencies = open("../deb_dependencies.txt").read().splitlines()
 
+debug = True
+
 
 def install_dependencies():
     if Utils.get_distro() == "arch" or command_exists("pacman"):
-        Utils.install_packages(arch_dependencies)
+        if not debug:
+            Utils.install_packages(arch_dependencies)
     else:
         Utils.install_packages(deb_dependencies)
 

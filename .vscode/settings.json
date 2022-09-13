@@ -66,5 +66,12 @@
         "valarray": "cpp",
         "variant": "cpp"
     },
-    "python.formatting.provider": "black"
+    "python.formatting.provider": "black",
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/abuyusif01/dev/personal_projects/display-manager",
+            "binaryPath": "/home/abuyusif01/dev/personal_projects/display-manager/main",
+            "binaryArgs": []
+        }
+    ],
 }

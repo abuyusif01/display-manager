@@ -1,19 +1,39 @@
 #!/bin/bash
 
-function compile() { # args $1: source file and location, $2: output file with location
-    # compile the code
-}
-
 function prepare() { # no args, Just default shit
-# install dependencies
-    sudo apt install -y 
-    # copy binary to /usr/local/bin
-    # copy systemd file to /etc/systemd/system
+    # install dependencies
+    pwd # print working directory
+
+    # make sure the user have python 3.6 or higher installed
+    if ! command -v python3 &>/dev/null; then
+        echo "python3 could not be found"
+        exit
+    else
+        echo "[+] python3 found"
+        echo "[+] Installing dependecy packages"
+        cd build/utils
+        python3 utils.py # install dependencies
+        cd ../..         # go back to the root directory
+    fi
+
 }
 
-function clean() { 
-    # remove the binary
-    # remove the systemd file
+function compile() {
+    # compile the project
+    echo "[+] Compiling the project"
+    make
+    cp main bin/debug/dm_debug
+    cp main bin/release/dm
+    rm main
 }
 
+function install() {
+    # install the project
+    echo "[+] Installing the project"
+    cd bin/release
+    sudo cp dm /usr/bin
+    cd ../..
+}
 
+prepare # call the prepare function
+compile # call the compile function

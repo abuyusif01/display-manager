@@ -85,6 +85,7 @@ static void init_env(struct passwd *pw)
     set_env("XAUTHORITY", xauthority);
 }
 
+
 static int conv(int num_msg, const struct pam_message **msg, struct pam_response **resp, void *appdata_ptr)
 {
     int i;
