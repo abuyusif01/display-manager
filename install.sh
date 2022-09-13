@@ -16,6 +16,22 @@ function prepare() { # no args, Just default shit
         cd ../..         # go back to the root directory
     fi
 
+    # copy from config to /etc/pam.d
+    echo "[+] Copying pam.d files"
+    sudo cp config/pam.d/* /etc/pam.d/
+
+    # copy to /etc/systemd/system
+    echo "[+] Copying systemd files"
+    sudo cp config/systemd/* /etc/systemd/system/
+
+    # disable display-manager.service
+    echo "[+] Disabling display-manager.service"
+    sudo systemctl disable display-manager.service
+
+    # enable dm.service
+    echo "[+] Enabling dm.service"
+    sudo systemctl enable dm.service
+
 }
 
 function compile() {
