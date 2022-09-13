@@ -35,6 +35,7 @@ Logger::Logger(int type, std::string content, std::string location)
         logger << this->unknown << date_and_time->date_and_time() << this->clean(content);
     }
 
+    delete (date_and_time); // since we are done with it
     logger.close();
 }
 
