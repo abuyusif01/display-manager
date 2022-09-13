@@ -43,7 +43,7 @@ function compile() {
     # compile the project
     echo "[+] Compiling the project"
     make clean
-    make degub
+    make debug
     cp main bin/debug/dm_debug
     rm main
     make release
