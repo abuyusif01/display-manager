@@ -37,14 +37,16 @@ function prepare() { # no args, Just default shit
         echo "[+] Not enabling dm at startup"
     fi
 
-
 }
 
 function compile() {
     # compile the project
     echo "[+] Compiling the project"
-    make
+    make clean
+    make degub
     cp main bin/debug/dm_debug
+    rm main
+    make release
     cp main bin/release/dm
     rm main
 }
