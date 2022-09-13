@@ -15,6 +15,3 @@ release:
 # clean the build
 clean:
 	rm -rf main
-
-# i have no idea what this does
-.PHONY: clean
