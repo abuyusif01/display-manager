@@ -24,18 +24,31 @@ function prepare() { # no args, Just default shit
     echo "[+] Copying systemd files"
     sudo cp config/systemd/* /etc/systemd/system/
 
-    # ask the user if they wanna disable and enale dm
-    echo "[+] Would you like to enable dm at startup"
-    read -p "[+] (y/n): " choice
-    if [[ $choice == "y" ]]; then
-        # disable display-manager.service
-        echo "[+] Disabling display-manager.service"
-        sudo systemctl disable display-manager.service
-        echo "[+] Enabling dm.service"
-        sudo systemctl enable dm.service
-    else
-        echo "[+] Not enabling dm at startup"
+    # if distro == ubuntu
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        if [ "$ID" == "ubuntu" ]; then
+            echo "[+] Github environment detected"
+            # disable display-manager.service
+            echo "[+] Disabling display-manager.service"
+            sudo systemctl disable display-manager.service 2>/dev/null
+            echo "[+] Enabling dm.service"
+            sudo systemctl enable dm.service 2>/dev/null
+            
+        elif [[ "$ID" != "ubuntu" ]]; then
+            echo "[+] Normal environment detected"
+            echo "[+] Would you like to enable dm at startup"
+            read -p "[+] (y/n): " choice
+            if [[ $choice == "y" ]]; then
+                # enable dm.service
+                echo "[+] Enabling dm.service"
+                sudo systemctl enable dm.service 2>/dev/null
+            fi
+            echo "[+] Not enabling dm at startup"
+        fi
     fi
+
+    # ask the user if they wanna disable and enale dm
 
 }
 
