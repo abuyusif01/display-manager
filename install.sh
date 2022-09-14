@@ -2,7 +2,6 @@
 
 function prepare() { # no args, Just default shit
     # install dependencies
-    pwd # print working directory
 
     # make sure the user have python 3.6 or higher installed
     if ! command -v python3 &>/dev/null; then
@@ -58,11 +57,8 @@ function compile() {
     echo "[+] Compiling the project"
     make clean
     make debug
-    cp main bin/debug/dm_debug
-    rm -rf main
     make release
-    cp main bin/release/dm
-    rm -rf main
+    make clean
 }
 
 function install() {
