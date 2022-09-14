@@ -5,4 +5,5 @@
 5. make a header file authentication.cc {aka create a class - all the fields are static} [done?]
 6. Github actions [done]
 7. Make a meaningful readme file
-8. Make authentication.cc login only with root problem
+8. Fix authentication.cc login only with root problem
+9. Fix makefiles for arch build compatability
