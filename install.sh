@@ -40,10 +40,11 @@ function prepare() { # no args, Just default shit
             read -p "[+] (y/n): " choice
             if [[ $choice == "y" ]]; then
                 # enable dm.service
+                echo "[+] Disabling display-manager.service"
+                sudo systemctl disable display-manager.service 2>/dev/null
                 echo "[+] Enabling dm.service"
                 sudo systemctl enable dm.service 2>/dev/null
             fi
-            echo "[+] Not enabling dm at startup"
         fi
     else
         echo "[-] Could not detect distro"
