@@ -23,16 +23,16 @@ Logger::Logger(int type, std::string content, std::string location)
     switch (type)
     {
     case 1:
-        logger << this->error << date_and_time->date_and_time() << this->clean(content);
+        logger << this->error << date_and_time->date_and_time() << this->clean(content) << std::endl;
         break;
     case 2:
-        logger << this->warning << date_and_time->date_and_time() << this->clean(content);
+        logger << this->warning << date_and_time->date_and_time() << this->clean(content) << std::endl;
         break;
     case 3:
-        logger << this->info << date_and_time->date_and_time() << this->clean(content);
+        logger << this->info << date_and_time->date_and_time() << this->clean(content) << std::endl;
         break;
     default:
-        logger << this->unknown << date_and_time->date_and_time() << this->clean(content);
+        logger << this->unknown << date_and_time->date_and_time() << this->clean(content) << std::endl;
     }
 
     delete (date_and_time); // since we are done with it
