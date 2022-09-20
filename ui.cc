@@ -1,6 +1,7 @@
 #include "headers/ui.h"
 
-#include "authentication.cc"
+#include "headers/authentication.h"
+
 
 // constructor
 void Ui::init_scr()
@@ -92,7 +93,7 @@ void Ui::driver(int ch)
         pos_form_cursor(this->form);
         this->init_input();
 
-        if (login(this->get_name(), this->get_pass(), this->cmd.c_str()))
+        if ( Authentication::login(this->get_name(), this->get_pass(), this->cmd.c_str()))
         {
             
             free_form(this->form);
