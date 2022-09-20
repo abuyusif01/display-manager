@@ -64,7 +64,11 @@
         "cinttypes": "cpp",
         "typeinfo": "cpp",
         "valarray": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "source_location": "cpp",
+        "system_error": "cpp",
+        "tuple": "cpp",
+        "*.inc": "cpp"
     },
     "python.formatting.provider": "black",
     "makefile.launchConfigurations": [
