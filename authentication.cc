@@ -1,10 +1,68 @@
 #include "headers/authentication.h"
 #include "headers/logger.h"
-#include  "headers/ui.h"
+#include "headers/ui.h"
 
 static pam_handle_t *pam_handle;
-int Authentication::end(int last_result){
-int result = pam_end(pam_handle, last_result);
+
+void Authentication::init_env(struct passwd *pw, const char* tty_id)
+{
+    extern char **environ;
+    char *term = getenv("TERM");
+    char *lang = getenv("LANG");
+    char user[15];
+
+    // setting xdg env
+    snprintf(user, 15, "/run/user/%d", getuid());
+    set_env("XDG_SESSION_TYPE", "x11");
+    setenv("XDG_RUNTIME_DIR", user, 0);
+    setenv("XDG_SESSION_CLASS", "user", 0);
+    setenv("XDG_SESSION_ID", "1", 0);
+    setenv("XDG_SEAT", "seat0", 0);
+    setenv("XDG_VTNR", tty_id, 0);
+    // clean env
+    environ[0] = NULL;
+
+    setenv("TERM", term ? term : "linux", 1);
+    setenv("HOME", pw->pw_dir, 1);
+    setenv("PWD", pw->pw_dir, 1);
+    setenv("SHELL", pw->pw_shell, 1);
+    setenv("USER", pw->pw_name, 1);
+    setenv("LOGNAME", pw->pw_name, 1);
+    setenv("LANG", lang ? lang : "C++", 1);
+}
+
+int Authentication::get_free_display(int size)
+{
+    char xlock[size];
+    uint8_t i; // we declare this here so could access it outside the loop
+    for (i = 0; i < 200; i++)
+    {
+        snprintf(xlock, sizeof(xlock), "/tmp/.X%d-lock", i);
+        if (access(xlock, F_OK) == -1)
+        {
+            break;
+        }
+    }
+    return i;
+}
+
+void Authentication::reset_terminal(struct passwd *pw)
+{
+    pid_t pid = fork();
+    if (pid == 0)
+    {
+        execl(pw->pw_shell, pw->pw_shell, "-c"
+                                          "reset",
+              NULL);
+        exit(EXIT_SUCCESS);
+    }
+    int status;
+    waitpid(pid, &status, 0);
+}
+
+int Authentication::end(int last_result)
+{
+    int result = pam_end(pam_handle, last_result);
     pam_handle = 0;
     return result;
 }
@@ -19,22 +77,30 @@ int Authentication::conv(int num_msg, const struct pam_message **msg, struct pam
     }
 
     int result = PAM_SUCCESS;
+
+    // this loop assign the actual name and pass to the pam_response
     for (i = 0; i < num_msg; i++)
     {
         char *name, *pass;
         switch (msg[i]->msg_style)
         {
         case PAM_PROMPT_ECHO_ON:
+        {
             name = ((char **)appdata_ptr)[0];
             (*resp)[i].resp = strdup(name);
             break;
+        }
         case PAM_PROMPT_ECHO_OFF:
+        {
             pass = ((char **)appdata_ptr)[1];
             (*resp)[i].resp = strdup(pass);
             break;
+        }
         case PAM_ERROR_MSG:
+        {
             Logger(1, msg[i]->msg);
             break;
+        }
         case PAM_TEXT_INFO:
         {
             // Todo:  fix logger constructor to accept args like this
@@ -110,7 +176,7 @@ bool Authentication::logout(void)
     end(result);
     return true;
 }
- bool Authentication::login(const char *name, const char *pass, const char *cmd)
+bool Authentication::login(const char *name, const char *pass, const char *cmd)
 {
     const char *data[2] = {name, pass};
     struct pam_conv pam_conv
@@ -175,4 +241,3 @@ bool Authentication::logout(void)
     }
     return true;
 }
-

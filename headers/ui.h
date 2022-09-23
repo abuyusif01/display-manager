@@ -2,13 +2,14 @@
 #define UI_H
 
 #include <form.h>
+#include "authentication.h"
 #include <ctype.h>
 #include <ncurses.h>
 #include <assert.h>
 #include <string.h>
 #include <iostream>
 
-class Ui : FORM, WINDOW
+class Ui : FORM, WINDOW, Authentication
 {
 
 private:
