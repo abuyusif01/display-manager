@@ -106,7 +106,7 @@ void Ui::driver(int ch)
             clear();
             printw("Login sucessfully");
         }
-        else
+        else // todo: make this restart the window
         {
             clear();
             printw("something went wrong!!");
