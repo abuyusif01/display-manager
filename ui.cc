@@ -93,7 +93,7 @@ void Ui::driver(int ch)
         pos_form_cursor(this->form);
         this->init_input();
 
-        if ( Authentication::login(this->get_name(), this->get_pass(), this->cmd.c_str()))
+        if ( login(this->get_name(), this->get_pass(), this->cmd.c_str()))
         {
             
             free_form(this->form);
