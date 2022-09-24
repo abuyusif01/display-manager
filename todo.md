@@ -3,10 +3,9 @@
 3. Create a systemd service file [done]
 4. Create a test file {unit testing for internal usage}
 5. make a header file authentication.cc {aka create a class - all the fields are
-   static} [done?]
+   static} [done]
 6. Github actions [done]
 7. Make a meaningful readme file
-8. Fix authentication.cc login only with root problem
-9. Fix makefiles for arch build compatability
-10. install script not copying stuff to /usr/bin
-
+8. Fix authentication.cc login only with root problem [done]
+9. Fix makefiles for arch build compatability [done]
+10. install script not copying stuff to /usr/bin [done]
