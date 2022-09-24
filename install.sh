@@ -64,11 +64,13 @@ function compile() {
 
 function install() {
     # install the project
-    echo "[+] Installing the project"
+    echo "[+] Installing dm to /usr/bin/dm"
     cd bin/release
-    sudo cp dm /usr/bin
+    sudo rm -rf /usr/bin/dm
+    sudo cp dm /usr/bin/dm
     cd ../..
 }
 
 prepare # call the prepare function
 compile # call the compile function
+install # copy dm to /usr/bin/dm
