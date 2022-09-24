@@ -7,10 +7,14 @@
 #include <security/pam_appl.h>
 #include <security/pam_misc.h>
 #include <sys/stat.h>
+#include <sys/types.h>
+#include <grp.h>
 #include <sys/wait.h>
 #include <pwd.h>
 #include <paths.h>
 #include <string>
+#include <xcb/xcb.h>
+#include <utmp.h>
 
 class Authentication
 {
@@ -29,13 +33,18 @@ private:
     static const char *cmd;
 
 public:
+    static void remove_utmp_entry(struct utmp *entry);
+    static void add_utmp_entry(struct utmp *entry, char *username, pid_t display_pid);
+    static void env_xdg(const char *tty_id);
+    static void xauth(const char *display_name, const char *shell, struct passwd *pw);
+    static void xorg(struct passwd *pw, const char *vt, const char *desktop_cmd);
     static void init_env(struct passwd *pw, const char *tty_id = "2");
-    int get_free_display(int size);
+    static int get_free_display();
     static void reset_terminal(struct passwd *pw);
     static int end(int last_result);
     static bool set_env(std::string nam, std::string value);
     static bool logout(void);
     static int conv(int num_msg, const struct pam_message **msg, struct pam_response **resp, void *appdata_ptr);
-    static bool login(const char *name, const char *pass, const char *cmd);
+    static bool login(const char *name, const char *pass);
 };
 #endif
