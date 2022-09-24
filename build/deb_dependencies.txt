@@ -1,3 +1,5 @@
 g++
 libpam-dev
 ncurses-dev
+
+sudo apt-get install xcb libxcb-xkb-dev x11-xkb-utils libx11-xcb-dev libxkbcommon-x11-dev
