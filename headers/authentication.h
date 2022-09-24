@@ -33,8 +33,6 @@ private:
     static const char *cmd;
 
 public:
-    static void remove_utmp_entry(struct utmp *entry);
-    static void add_utmp_entry(struct utmp *entry, char *username, pid_t display_pid);
     static void env_xdg(const char *tty_id);
     static void xauth(const char *display_name, const char *shell, struct passwd *pw);
     static void xorg(struct passwd *pw, const char *vt, const char *desktop_cmd);
