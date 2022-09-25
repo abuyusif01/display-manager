@@ -8,4 +8,6 @@
 7. Make a meaningful readme file
 8. Fix authentication.cc login only with root problem [done]
 9. Fix makefiles for arch build compatability [done]
-10. install script not copying stuff to /usr/bin [done]
+10. Install script not copying stuff to /usr/bin [done]
+11. Create archlinux post installation script
+
